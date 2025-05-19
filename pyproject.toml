@@ -1,5 +1,5 @@
 [project]
-name = "Karakeep Auto Adder"
+name = "Karakeep_Auto_Adder"
 version = "0.1.0"
 description = "Server side of a Telegram Bot to automatically add links sent to the bot to a local Karakeep instance."
 readme = "README.md"

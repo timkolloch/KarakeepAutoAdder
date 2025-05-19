@@ -11,11 +11,13 @@ CONFIG = dotenv_values(".env")
 async def reply(update, context):
     user_id = update.effective_user.id
     if str(user_id) not in CONFIG.get('AUTHORIZED_USERS'):
+        print(f"User {user_id} tried to access the bot.")
         return
 
     url = update.message.text.strip()
     if not URL_REGEX.match(url):
         await update.message.reply_text("❌ That doesn't look like a valid link.")
+        print("Received invalid link")
         return
 
     date = datetime.now(UTC).strftime("%c")
@@ -36,8 +38,10 @@ async def reply(update, context):
 
     if res.status == 201:
         await update.message.reply_text('Bookmark added successfully.')
+        print(f"Added link {url} to Karakeep.")
     else:
         await update.message.reply_text(f'Failed to add bookmark: {res.status} - {res.read().decode()}')
+        print(f"Failed to add bookmark: {res.read().decode()}")
 
 def main():
     """
